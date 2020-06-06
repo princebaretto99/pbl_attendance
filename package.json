@@ -2,6 +2,9 @@
   "name": "pbl_attendance",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "12.x"
+  },
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.19.0",
@@ -30,5 +33,6 @@
   "bugs": {
     "url": "https://github.com/carol80/pbl_attendance/issues"
   },
-  "homepage": "https://github.com/carol80/pbl_attendance#readme"
+  "homepage": "https://github.com/carol80/pbl_attendance#readme",
+  "keywords": []
 }
