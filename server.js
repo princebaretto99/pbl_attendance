@@ -72,10 +72,17 @@ faceapi.env.monkeyPatch({
  });
 
 
-async function getdescriptors(query_image="./views/reclamation.jpeg"){
+async function getdescriptors_single(query_image="./views/reclamation.jpeg"){
     document.getElementById('myImg').src = query_image;
     image = document.getElementById('myImg');
     const detections = await faceapi.detectSingleFace(image).withFaceLandmarks().withFaceDescriptor()
+    return detections;
+}
+
+async function getdescriptors(query_image="./views/reclamation.jpeg"){
+    document.getElementById('myImg').src = query_image;
+    image = document.getElementById('myImg');
+    const detections = await faceapi.detectAllFaces(image).withFaceLandmarks().withFaceExpressions()
     return detections;
 }
 
@@ -92,7 +99,7 @@ app.post("/registration", async (req, res)=>{
     var students = db.collection('students').doc('details');
     students.set({
         "rno" : req.rno,
-        "descriptor" : getdescriptors(req.files.Image)
+        "descriptor" : getdescriptors_single(req.files.Image)
       })
 
     res.json({"status": "Student Added to the database!!"})
@@ -110,16 +117,17 @@ app.post("/registration", async (req, res)=>{
 app.post("/processing_single", async (req, res)=>{
 
     const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
-    const detections = getdescriptors(req.files.classImage)
+    const detections = getdescriptors_single(req.files.classImage)
     const results = detections.map(d => faceMatcher.findBestMatch(d.descriptor))
 
-    var attendance = db.collection('attendance').doc('');
+    var students = db.collection('students').doc('');
+    descriptors = getdescriptors(req.files.Image)
     // students.set({
     //     "rno" : req.rno,
-    //     "descriptor" : getdescriptors(req.files.Image)
+    //     "descriptor" : descriptors
     //   })
 
-    res.json({"status": ""})
+    res.json({"status": "Successful!!","descriptors": descriptors})
 })
 
 
@@ -136,12 +144,12 @@ app.post("/processing_group", async (req, res)=>{
     const results = detections.map(d => faceMatcher.findBestMatch(d.descriptor))
 
     var attendance = db.collection('attendance').doc('');
-    // students.set({
-    //     "rno" : req.rno,
-    //     "descriptor" : getdescriptors(req.files.Image)
-    //   })
+    attendance.set({
+        "rno" : req.rno,
+        "descriptor" : getdescriptors(req.files.Image)
+      })
 
-    res.json({"status": ""})
+    res.json({"status": "attendance successfull!!", "Attendance": results})
 })
 
 
