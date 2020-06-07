@@ -9,6 +9,7 @@
 <div id="content">
   <div id="intro">
     <h2>Face Recognition Attendance System</h2><h3>(Backend)</h3>
+    <p>The backend of the project is hosted on heroku<a href="https://pbl-attendance.herokuapp.com/">Click here<a></p>
     <p>Face Recognition Attendance System is a project build for the sole purpose of optimizing the attendance system of schools/colleges.</p>
     <p>PBL-Attendance is the backend of the project. It uses Face-api.js for processing the image.  The project aims to irradicate the process of roll-call based attendance. The project has multiple front-ends</p>
     <ul>
