@@ -79,12 +79,18 @@ async function getdescriptors(query_image="./views/reclamation.jpeg"){
     return detections;
 }
 
+
+/*********************************************************
+ * 
+ *                 REGISTRATION
+ * 
+ *********************************************************/
+
 app.post("/registration", async (req, res)=>{
     // var query_image = "./views/reclamation.jpeg"
 
     var students = db.collection('students').doc('details');
     students.set({
-        "name" : req.name,
         "rno" : req.rno,
         "descriptor" : getdescriptors(req.files.Image)
       })
@@ -93,22 +99,51 @@ app.post("/registration", async (req, res)=>{
 })
 
 
-app.post("/detection", async (req, res)=>{
+
+/*********************************************************
+ * 
+ *                SINGLE STUDENT DETECTION
+ * 
+ *********************************************************/
+
+
+app.post("/processing_single", async (req, res)=>{
 
     const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
     const detections = getdescriptors(req.files.classImage)
     const results = detections.map(d => faceMatcher.findBestMatch(d.descriptor))
-    // var query_image = "./views/reclamation.jpeg"
 
     var attendance = db.collection('attendance').doc('');
     // students.set({
-    //     "name" : req.name,
     //     "rno" : req.rno,
     //     "descriptor" : getdescriptors(req.files.Image)
     //   })
 
     res.json({"status": ""})
 })
+
+
+/*********************************************************
+ * 
+ *                 ATTENDANCE
+ * 
+ *********************************************************/
+
+app.post("/processing_group", async (req, res)=>{
+
+    const faceMatcher = new faceapi.FaceMatcher(labeledFaceDescriptors, 0.6)
+    const detections = getdescriptors(req.files.classImage)
+    const results = detections.map(d => faceMatcher.findBestMatch(d.descriptor))
+
+    var attendance = db.collection('attendance').doc('');
+    // students.set({
+    //     "rno" : req.rno,
+    //     "descriptor" : getdescriptors(req.files.Image)
+    //   })
+
+    res.json({"status": ""})
+})
+
 
 var port = process.env.PORT || 8080
 
