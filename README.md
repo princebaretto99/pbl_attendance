@@ -1,6 +1,7 @@
 <div id="topbar">
   <li id="nametopbar">PBL-Attendance</li>
   <ul id="topmenu">
+    <a href="#report"><li>Report/ppt</li></a>
     <a href="#contact"><li>Routes</li></a>
     <a href="#intro"><li>About</li></a>
   </ul>
@@ -26,6 +27,15 @@
       <li><h1><a href="#">/registration</a></h1> - for registering the face landmarks with the system.</li>
       <li><h1><a href="#">/processing_single</a></h1> - for recognizing the individual person from a picture.</li>
       <li><h1><a href="#">/processing_group</a></h1> - for recognizing all the individuals from the group picture.</li>
+    </ul>
+    
+  </div>
+  <div id="report">
+    <h2>Report/ppt</h2>
+    <p>A detailed report of the whole project can be found here</p>
+    <ul>
+      <li><h1><a href="https://github.com/carol80/pbl_attendance/tree/master/Report">Report</a></h1></li>
+      <li><h1><a href="https://github.com/carol80/pbl_attendance/tree/master/Report">ppt</a></h1></li>
     </ul>
     
   </div>
