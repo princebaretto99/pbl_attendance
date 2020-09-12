@@ -16,7 +16,7 @@
     "fs": "0.0.1-security",
     "jsdom": "^16.2.2",
     "morgan": "^1.10.0",
-    "node-fetch": "^2.6.0",
+    "node-fetch": "^2.6.1",
     "path": "^0.12.7"
   },
   "devDependencies": {},
